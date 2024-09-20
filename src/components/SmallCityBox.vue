@@ -6,13 +6,6 @@ const props = defineProps({
   search: {
     type: Object,
     required: true,
-    // validator: (value) => {
-    //   return (
-    //     typeof value.name === "string" &&
-    //     Array.isArray(value.weather) &&
-    //     typeof value.main === "object"
-    //   );
-    // },
   },
 });
 

@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import { useWeatherDataStore } from "../store/store";
 import SmallCityBox from "./SmallCityBox.vue";
+import MotionWrapper from "./MotionWrapper.vue";
 
 const store = useWeatherDataStore();
 
@@ -15,12 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <motion.div
-    :initial="{ opacity: 0, x: -100 }"
-    :animate="{ opacity: 1, x: 0 }"
-    :transition="{ duration: 0.5, delay: 0.2 }"
-  > -->
-  <div>
+  <MotionWrapper>
     <div class="bg-blue-500 sm:w-[600px] mx-auto flex flex-col py-3 rounded-lg">
       <h2 class="text-sm text-gray-200 text-light px-3 mb-1">
         Recently viewed cities
@@ -33,8 +29,7 @@ onMounted(() => {
         />
       </ul>
     </div>
-    <!-- </motion.div> -->
-  </div>
+  </MotionWrapper>
 </template>
 
 <style scoped>

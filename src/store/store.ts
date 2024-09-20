@@ -9,7 +9,7 @@ import {
 import { getUserLocation } from "../utils/userLocation";
 
 export const useWeatherDataStore = defineStore("weatherData", () => {
-  const city = ref("");
+  const city = ref<string>("");
   const weatherData = ref<WeatherDataProps>(null);
   const searchList = ref<SearchItem[] | []>([]);
 
@@ -55,7 +55,7 @@ export const useWeatherDataStore = defineStore("weatherData", () => {
     if (storage) {
       updateUserLocation(JSON.parse(storage));
     }
-    getUserLocation(updateUserLocation);
+    getUserLocation(updateUserLocation, userLocation.value);
   });
 
   watch(userLocation, (newUserLocation) => {
