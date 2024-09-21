@@ -1,5 +1,50 @@
-# Vue 3 + TypeScript + Vite
+# Simple Weather App
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A simple Vue weather app showing current weather in a city and the 3 hourly forecast. All the data is from OpenWeather API and Google Cloud API is used for input autocomplete.
+It is designed mobile first with tailwindcss.
+Vue 3 + TypeScript + Vite
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## <a name="quick-start">Quick Start</a>
+
+Follow these steps to set up the project locally on your machine.
+
+**Prerequisites**
+
+Make sure you have the following installed on your machine:
+
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+
+**Cloning the Repository**
+
+```bash
+git clone https://github.com/bauertim/weatherApp.git
+cd weatherApp
+```
+
+**Installation**
+
+Install the project dependencies using npm:
+
+```bash
+npm install
+```
+
+**Set Up Environment Variables**
+
+Create a new file named `.env` in the root of your project and add the following content:
+
+```env
+VITE_OPENWEATHER_API_KEY=
+VITE_GOOGLE_API_KEY=
+```
+
+Replace the placeholder values with your actual OpenWeather and Google Cloud API keys.
+Using google autocomplete is optional, you can remove the onMounted code in the InputForm component and just use plain input.
+
+**Running the Project**
+
+```bash
+npm run dev
+```
