@@ -11,7 +11,7 @@ export const getUserLocation = (
           userLocation.latitude.toFixed(5) === latitude.toFixed(5) &&
           userLocation.longitude.toFixed(5) === longitude.toFixed(5)
         ) {
-          console.log("same place");
+          // console.log("same place");
           return;
         }
         updateUserLocation({ latitude, longitude });

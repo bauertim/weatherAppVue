@@ -13,7 +13,6 @@ export const useWeatherDataStore = defineStore("weatherData", () => {
   const weatherData = ref<WeatherDataProps>(null);
   const searchList = ref<SearchItem[] | []>([]);
 
-  const errorFetch = ref<boolean>(false);
   const forecastData = ref<ForecastItem | null>(null);
   const userLocation = ref<userLocationProps | null>(null);
 
@@ -29,9 +28,6 @@ export const useWeatherDataStore = defineStore("weatherData", () => {
   const updateForecastData = (data: any) => {
     forecastData.value = data;
   };
-  const updateErrorFetch = (data: boolean) => {
-    errorFetch.value = !data;
-  };
   const updateUserLocation = (data: userLocationProps) => {
     userLocation.value = data;
   };
@@ -40,33 +36,31 @@ export const useWeatherDataStore = defineStore("weatherData", () => {
     if (newCity !== "") {
       fetchDataWeather(
         searchList.value,
-        errorFetch.value,
         city.value,
         updateWeatherData,
-        updateSearchList,
-        updateErrorFetch
+        updateSearchList
       );
       fetchDataForecast(city.value, updateForecastData);
     }
   });
 
   onMounted(() => {
+    getUserLocation(updateUserLocation, userLocation.value);
     const storage = localStorage.getItem("currentLocation");
     if (storage) {
       updateUserLocation(JSON.parse(storage));
+    } else {
+      updateCity("Ljubljana");
     }
-    getUserLocation(updateUserLocation, userLocation.value);
   });
 
   watch(userLocation, (newUserLocation) => {
     if (newUserLocation) {
       fetchWeatherDataCurrent(
         searchList.value,
-        errorFetch.value,
         userLocation.value,
         updateWeatherData,
-        updateSearchList,
-        updateErrorFetch
+        updateSearchList
       );
       fetchDataForecastCurrent(userLocation.value, updateForecastData);
     }
@@ -76,14 +70,12 @@ export const useWeatherDataStore = defineStore("weatherData", () => {
     weatherData,
     searchList,
     city,
-    errorFetch,
     forecastData,
     userLocation,
     updateWeatherData,
     updateSearchList,
     updateCity,
     updateForecastData,
-    updateErrorFetch,
     updateUserLocation,
   };
 });

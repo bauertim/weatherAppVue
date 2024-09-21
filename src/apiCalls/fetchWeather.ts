@@ -1,12 +1,13 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 export const fetchDataWeather = async (
   searchList: SearchItem[] | [],
-  errorFetch: boolean,
   city: string,
   updateWeatherData: Function,
-  updateSearchList: Function,
-  updateErrorFetch: Function
+  updateSearchList: Function
 ) => {
   try {
     const response = await axios.get(
@@ -22,24 +23,43 @@ export const fetchDataWeather = async (
     updateSearchList(data);
     localStorage.setItem("searchHistory", JSON.stringify(data));
     // console.log("response data", response.data);
-
     // console.log(response.data);
-  } catch (error) {
+  } catch (error: AxiosError | any) {
+    if (error.response.status === 404) {
+      toast.error("City not found");
+    } else if (error.response.status === 401) {
+      toast.error("API key invalid");
+    } else if (error.response.status === 429) {
+      toast.error("API key limit reached");
+    } else if (error.response.status === 500) {
+      toast.error("Server error");
+    } else if (error.response.status === 503) {
+      toast.error("Service unavailable");
+    } else if (error.response.status === 504) {
+      toast.error("Gateway timeout");
+    } else if (error.response.status === 400) {
+      toast.error("Bad request");
+    } else if (error.response.status === 403) {
+      toast.error("Forbidden");
+    } else if (error.response.status === 405) {
+      toast.error("Method not allowed");
+    } else if (error.response.status === 408) {
+      toast.error("Request timeout");
+    } else {
+      toast.error("City not found");
+    }
     console.error(error);
-    updateErrorFetch(!errorFetch);
   }
 };
 
 export const fetchWeatherDataCurrent = async (
   searchList: SearchItem[] | [],
-  errorFetch: boolean,
   userLocation: {
     latitude: number;
     longitude: number;
   } | null,
   updateWeatherData: Function,
-  updateSearchList: Function,
-  updateErrorFetch: Function
+  updateSearchList: Function
 ) => {
   try {
     const response = await axios.get(
@@ -67,9 +87,31 @@ export const fetchWeatherDataCurrent = async (
       )
     );
     // console.log(response.data);
-  } catch (error) {
+  } catch (error: AxiosError | any) {
+    if (error.response.status === 404) {
+      toast.error("City not found");
+    } else if (error.response.status === 401) {
+      toast.error("API key invalid");
+    } else if (error.response.status === 429) {
+      toast.error("API key limit reached");
+    } else if (error.response.status === 500) {
+      toast.error("Server error");
+    } else if (error.response.status === 503) {
+      toast.error("Service unavailable");
+    } else if (error.response.status === 504) {
+      toast.error("Gateway timeout");
+    } else if (error.response.status === 400) {
+      toast.error("Bad request");
+    } else if (error.response.status === 403) {
+      toast.error("Forbidden");
+    } else if (error.response.status === 405) {
+      toast.error("Method not allowed");
+    } else if (error.response.status === 408) {
+      toast.error("Request timeout");
+    } else {
+      toast.error("City not found");
+    }
     // console.error(error);
-    updateErrorFetch(!errorFetch);
   }
 };
 

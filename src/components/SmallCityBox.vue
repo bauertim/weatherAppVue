@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from "vue";
 import { useFormDataStore, useWeatherDataStore } from "../store/store";
 
 const props = defineProps({
